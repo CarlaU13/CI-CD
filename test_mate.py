@@ -11,5 +11,9 @@ class TestMate(unittest.TestCase):
         resultado = cebar_mate(90)
         self.assertEqual(resultado, "Agua muy caliente, se quemó la yerba.")
 
+    def test_agua_fria(self):
+        resultado = cebar_mate(75)
+        self.assertEqual(resultado, "Está helado el mate, falta temperatura, te va a doler la panza.")
+
 if __name__ == '__main__':
     unittest.main()
