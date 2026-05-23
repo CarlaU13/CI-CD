@@ -1,7 +1,7 @@
 def cebar_mate(temperatura_agua):
-    if temperatura_agua > 85:
-        return "Agua muy caliente, se lavó el mate."
-    elif temperatura_agua < 75:
-        return "Agua muy fría, falta temperatura."
+    if temperatura_agua > 90:
+        return "Agua muy caliente, se quemó la yerba."
+    elif temperatura_agua < 80:
+        return "Está helado el mate, falta temperatura, te va a doler la panza."
     else:
         return "Temperatura ideal, mate listo."

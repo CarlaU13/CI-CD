@@ -1,0 +1,26 @@
+name: Integracion Continua Mate
+
+# 2. El Evento: que arranque cada vez que haga un "push" a la rama "main".
+on:
+  push:
+    branches: [ "main" ]
+
+# 3. Los Trabajos (Jobs)
+jobs:
+  build-y-test:
+    # 4. El Entorno: Le pedimos a GitHub que nos preste una PC con Linux (Ubuntu).
+    runs-on: ubuntu-latest
+
+    # 5. Las Tareas (Steps): cada paso es una tarea que se ejecuta en la máquina virtual.
+    steps:
+    - name: Paso 1 - Clonar el código
+      uses: actions/checkout@v3 # Esta es una acción prearmada que descarga tu código a la máquina virtual.
+
+    - name: Paso 2 - Preparar la máquina con Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' # Instalamos la versión de Python.
+
+    - name: Paso 3 - Ejecutar nuestra prueba automatizada
+      # Acá escribimos el mismo comando de consola que usaste en tu Build Local.
+      run: python -m unittest test_mate.py
