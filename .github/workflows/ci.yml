@@ -25,6 +25,7 @@ jobs:
       # Acá escribimos el mismo comando de consola que usaste en tu Build Local.
       run: python -m unittest test_mate.py
 
-    - name: Paso 4 - Empaquetar la aplicación con Docker
-      # Este comando le dice a GitHub que construya la imagen si la prueba anterior fue exitosa
-      run: docker build -t app-mate .
+    - name: Paso 4 - Empaquetar y probar la aplicación con Docker
+      run: |
+        docker build -t app-mate .
+        docker run app-mate
