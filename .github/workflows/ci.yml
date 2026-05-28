@@ -29,3 +29,13 @@ jobs:
       run: |
         docker build -t app-mate .
         docker run app-mate
+    
+    - name: Mecanismo de Feedback - Notificar al Equipo en Slack
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,status # Los datos que va a mostrar el mensaje
+      env:
+        # Esto lee un link secreto que guardás en la configuración de GitHub
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+      if: always() # Fundamental: Le decimos que mande el mensaje SIEMPRE, incluso si el paso anterior falló (para avisar del error)
