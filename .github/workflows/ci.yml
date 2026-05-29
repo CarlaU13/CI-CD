@@ -27,8 +27,8 @@ jobs:
 
     - name: Paso 4 - Empaquetar la aplicación con Docker
       run: docker build -t app-mate-flask .
-    
-    - name: Mecanismo de Feedback - Notificar al Equipo en Slack
+    #agrego este comentario para probar el mecanismo de feedback
+    - name: Mecanismo de Feedback - Notificar en Slack
       uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}
