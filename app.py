@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def inicio():
     # 1. Ejecutamos nuestra lógica real con el agua a 80 grados
-    estado_del_mate = cebar_mate(80)
+    estado_del_mate = cebar_mate(90)
     
     # 2. Devolvemos un HTML súper básico ("Hola Mundo" style)
     return f"""
