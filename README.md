@@ -35,10 +35,6 @@ el ultimo paso no requiere una aprobacion manual.
 - Rama: `main`
 - Runtime: Docker
 - Auto-Deploy: `After CI Checks Pass`
-- Health Check Path: `/health`
-
-La ruta `/health` responde con HTTP 200 cuando la aplicacion esta funcionando.
-Render puede usarla para validar un despliegue y controlar el servicio activo.
 
 Para recibir feedback del entorno desplegado en Slack:
 
@@ -47,7 +43,7 @@ Para recibir feedback del entorno desplegado en Slack:
 3. Seleccionar `All notifications`.
 
 Esto complementa la notificacion de GitHub Actions: una informa el estado de
-CI y la otra informa despliegues y salud del servicio en Render.
+CI y la otra informa despliegues en Render.
 
 ## Prueba local
 
