@@ -1,20 +1,20 @@
 from flask import Flask
-from mate import cebar_mate # Importamos tu lógica original
+from mate import cebar_mate # Importamos la lógica original
 
 app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    # 1. Ejecutamos nuestra lógica real con el agua a 80 grados
-    estado_del_mate = cebar_mate(90)
+    # 1. Ejecuto nuestra lógica real con un valor de temperatura específico
+    estado_del_mate = cebar_mate(75)
     
-    # 2. Devolvemos un HTML súper básico ("Hola Mundo" style)
+    # 2.  HTML básico (parecido a "Hola Mundo")
     return f"""
     <html>
         <body style="text-align: center; margin-top: 50px; font-family: Arial;">
             <h1>🧉 Sistema de Cebado de Mate</h1>
             <h2>Estado en vivo: {estado_del_mate}</h2>
-            <p>Este texto se generó ejecutando el código real de Python.</p>
+            <p>Este es el estado actual del mate según la temperatura del agua</p>
         </body>
     </html>
     """
