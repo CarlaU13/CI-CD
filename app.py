@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    # 1. Ejecuto nuestra lógica real con un valor de temperatura específico
+    # 1. Ejecuto la lógica real con un valor de temperatura específico
+    #No se prueba el parametro de temperatura, sino el resultado que se muestra en la página
     estado_del_mate = cebar_mate(85)
     
     # 2.  HTML básico (parecido a "Hola Mundo")

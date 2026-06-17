@@ -1,39 +1,43 @@
 name: Integracion Continua Mate
 
-# 2. El Evento: que arranque cada vez que haga un "push" a la rama "main".
+# El workflow arranca cada vez que hago un push a main.
 on:
   push:
     branches: [ "main" ]
 
-# 3. Los Trabajos (Jobs)
 jobs:
   build-y-test:
-    # 4. El Entorno: Le pedimos a GitHub que nos preste una PC con Linux (Ubuntu).
+    # GitHub nos presta una maquina virtual Linux.
     runs-on: ubuntu-latest
 
-    # 5. Las Tareas (Steps): cada paso es una tarea que se ejecuta en la máquina virtual.
     steps:
-    - name: Paso 1 - Clonar el código
-      uses: actions/checkout@v4 # Esta es una acción prearmada que descarga tu código a la máquina virtual.
+    - name: Paso 1 - Clonar el codigo
+      uses: actions/checkout@v4
 
-    - name: Paso 2 - Preparar la máquina con Python
+    - name: Paso 2 - Preparar Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10' # Instalamos la versión de Python.
+        python-version: '3.10'
 
-    - name: Paso 3 - Ejecutar nuestra prueba automatizada
-      # Acá escribimos el mismo comando de consola que usaste en tu Build Local.
+    - name: Paso 3 - Instalar dependencias
+      run: pip install -r requirements.txt
+
+    - name: Paso 4 - Ejecutar prueba automatizada
       run: python -m unittest test_mate.py
 
-    - name: Paso 4 - Empaquetar la aplicación con Docker
+    - name: Paso 5 - Inspeccion estatica de codigo con Ruff
+      run: ruff check .
+
+    - name: Paso 6 - Empaquetar la aplicacion con Docker
       run: docker build -t app-mate-flask .
-    
+
     - name: Mecanismo de Feedback - Notificar en Slack
       uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}
-        fields: repo,message,commit,author,status # Los datos que va a mostrar el mensaje
+        fields: repo,message,commit,author,status
       env:
-        # Esto lee un link secreto guardado en la configuración de GitHub
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
-      if: always() # que mande el mensaje SIEMPRE, incluso si el paso anterior falló (para avisar del error)
+        # Esto lee un link secreto guardado en la configuracion de GitHub.
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # Manda el mensaje siempre, incluso si un paso anterior fallo.
+      if: always()

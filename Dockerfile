@@ -1,9 +1,11 @@
 FROM python:3.10-slim
 WORKDIR /app
-COPY . .
 
-# Instalamos Flask en el momento de crear la imagen
-RUN pip install flask
+# Instalamos las dependencias declaradas del proyecto
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
 
 EXPOSE 8000
 
