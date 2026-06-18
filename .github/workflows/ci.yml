@@ -1,8 +1,10 @@
 name: Integracion Continua Mate
 
-# El workflow arranca cada vez que hago un push a main.
+# El workflow arranca cada vez que hago un push a main o hago un pull request.
 on:
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
