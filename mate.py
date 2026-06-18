@@ -1,4 +1,3 @@
-#import os # Prueba de funcionamiento de Ruff
 def cebar_mate(temperatura_agua):
     #x=3 # Prueba de funcionamiento de Ruff
     if temperatura_agua >= 90:

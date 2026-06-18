@@ -13,7 +13,7 @@ def inicio():
     return f"""
     <html>
         <body style="text-align: center; margin-top: 50px; font-family: Arial;">
-            <h1>🧉 Sistema de Cebado de Mate</h1>
+            <h1>🧉 Sistema de Cebado de Mates cambiado</h1>
             <h2>Estado en vivo: {estado_del_mate}</h2>
             <p>Este es el estado actual del mate según la temperatura del agua</p>
         </body>
