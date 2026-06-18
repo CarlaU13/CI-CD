@@ -1,3 +1,5 @@
+import os # Prueba de funcionamiento de Ruff
+
 def cebar_mate(temperatura_agua):
     if temperatura_agua >= 90:
         return "Caliente"

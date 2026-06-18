@@ -3,18 +3,36 @@
 Proyecto simple en Python y Flask para demostrar un proceso de integracion y
 despliegue continuo.
 
+## Build local
+
+En terminal:
+
+```powershell
+python -m unittest test_mate.py; python -m ruff check .; docker build -t app-mate-flask .
+```
+
+Para ejecutar el contenedor localmente:
+
+```powershell
+docker run -p 8000:8000 app-mate-flask
+```
+
+`docker build` crea la imagen. `docker run` ejecuta un contenedor basado en esa
+imagen.
+
 ## Flujo
 
 1. Un `push` a la rama `main` actualiza el repositorio de GitHub.
 2. GitHub Actions ejecuta las pruebas unitarias.
-3. Si las pruebas pasan, GitHub Actions construye la imagen Docker.
-4. Slack informa el resultado de la build.
-5. Render espera que los controles de CI finalicen correctamente.
-6. Render construye con el `Dockerfile` y despliega la aplicacion web.
+3. GitHub Actions ejecuta Ruff como inspeccion estatica.
+4. Si las verificaciones pasan, GitHub Actions construye la imagen Docker.
+5. Slack informa el resultado de la build.
+6. Render espera que los controles de CI finalicen correctamente.
+7. Render construye con el `Dockerfile` y despliega la aplicacion web.
 
 ```text
 Desarrollador -> GitHub
-                  |-> GitHub Actions -> tests -> Docker build -> Slack
+                  |-> GitHub Actions -> tests -> Ruff -> Docker build -> Slack
                   |                         |
                   |                         v
                   |-> Render (After CI Checks Pass)
@@ -44,16 +62,3 @@ Para recibir feedback del entorno desplegado en Slack:
 
 Esto complementa la notificacion de GitHub Actions: una informa el estado de
 CI y la otra informa despliegues en Render.
-
-## Prueba local
-
-```powershell
-python -m unittest -v test_mate.py
-```
-
-## Ejecucion con Docker
-
-```powershell
-docker build -t app-mate-flask .
-docker run --rm -p 8000:8000 app-mate-flask
-```
